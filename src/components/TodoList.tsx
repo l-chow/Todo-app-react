@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Todo } from "../types/Todo";
 import TodoItem from "./TodoItem";
 import {
@@ -13,13 +13,23 @@ import {
 
 type TodoProps = {
   todoList: Todo[];
+  updateTodoList: (todo: Todo) => void;
 };
 
-const TodoList = ({ todoList }: TodoProps) => {
+const TodoList = ({ todoList, updateTodoList }: TodoProps) => {
+  const [editableTodoList, setEditableTodoList] = useState(todoList);
   const [showCompleted, setShowCompleted] = useState(true);
 
   const handleCompletedToggleChange = () => {
     setShowCompleted(!showCompleted);
+
+    if (!showCompleted) setEditableTodoList([...todoList]);
+    else
+      setEditableTodoList(
+        todoList.filter((todo) => {
+          return todo.completed == false;
+        })
+      );
   };
 
   return (
@@ -39,9 +49,15 @@ const TodoList = ({ todoList }: TodoProps) => {
       ></CardHeader>
       <CardContent>
         <List>
-          {todoList.map((todo) => (
-            <TodoItem todoItem={todo}></TodoItem>
-          ))}
+          {editableTodoList.map((todo) => {
+            return (
+              <TodoItem
+                key={todo.id}
+                todoItem={todo}
+                updateList={updateTodoList}
+              ></TodoItem>
+            );
+          })}
         </List>
       </CardContent>
     </Card>
