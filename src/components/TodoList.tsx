@@ -18,13 +18,22 @@ import {
 import { AddCircle } from "@mui/icons-material";
 import AddTodoItem from "./AddTodoItem";
 
+// TODO: add way to delete tasks (+ all completed tasks at once)
+//
+
 type TodoProps = {
   todoList: Todo[];
   updateTodoList: (todo: Todo) => void;
   addToTodoList: (todo: Todo) => void;
+  deleteTodoItem: (todo: Todo) => void;
 };
 
-const TodoList = ({ todoList, updateTodoList, addToTodoList }: TodoProps) => {
+const TodoList = ({
+  todoList,
+  updateTodoList,
+  addToTodoList,
+  deleteTodoItem,
+}: TodoProps) => {
   //const [editableTodoList, setEditableTodoList] = useState(todoList);
   const [showCompleted, setShowCompleted] = useState(true);
   const [addingNewTask, setAddingNewTask] = useState(false);
@@ -59,7 +68,15 @@ const TodoList = ({ todoList, updateTodoList, addToTodoList }: TodoProps) => {
   };
 
   return (
-    <Card>
+    <Card
+      sx={{
+        width: {
+          xs: 1.0,
+          sm: 0.75,
+          lg: 0.5,
+        },
+      }}
+    >
       <CardHeader
         title="List of Todos"
         action={
@@ -103,6 +120,7 @@ const TodoList = ({ todoList, updateTodoList, addToTodoList }: TodoProps) => {
                     key={todo.id}
                     todoItem={todo}
                     updateList={updateTodoList}
+                    deleteTodoItem={deleteTodoItem}
                   ></TodoItem>
                 );
               })
@@ -116,6 +134,7 @@ const TodoList = ({ todoList, updateTodoList, addToTodoList }: TodoProps) => {
                       key={todo.id}
                       todoItem={todo}
                       updateList={updateTodoList}
+                      deleteTodoItem={deleteTodoItem}
                     ></TodoItem>
                   );
                 })}

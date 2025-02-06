@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Todo } from "./types/Todo";
 import TodoList from "./components/TodoList";
-import classes from "./styles.module.css";
 import { Box } from "@mui/material";
 
 function App() {
@@ -38,6 +37,10 @@ function App() {
     setTodoList([newItem, ...todoList]);
   };
 
+  const deleteTodoItem = (item: Todo) => {
+    setTodoList(todoList.filter((todo) => item.id != todo.id));
+  };
+
   return (
     <Box
       minHeight="100vh"
@@ -45,7 +48,6 @@ function App() {
       alignItems="center"
       justifyContent="start"
       flexDirection="column"
-      minWidth="600px"
     >
       <h1>Todo App with Material UI</h1>
       {todoList.length > 0 ? (
@@ -54,6 +56,7 @@ function App() {
           todoList={todoList}
           updateTodoList={updateTodoList}
           addToTodoList={addToTodoList}
+          deleteTodoItem={deleteTodoItem}
         />
       ) : (
         <div>Loading Todos...</div>
