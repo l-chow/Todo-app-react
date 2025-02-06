@@ -8,7 +8,7 @@ function App() {
   const [todoList, setTodoList] = useState<Todo[]>([]);
 
   const fetchTodoList = () => {
-    fetch("https://dummyjson.com/todos")
+    fetch("https://dummyjson.com/todos?limit=3")
       .then((res) => res.json())
       .then((data: { todos: Todo[] }) => {
         console.log(data);
@@ -34,17 +34,27 @@ function App() {
     );
   };
 
+  const addToTodoList = (newItem: Todo) => {
+    setTodoList([newItem, ...todoList]);
+  };
+
   return (
     <Box
       minHeight="100vh"
       display="flex"
       alignItems="center"
-      justifyContent="center"
+      justifyContent="start"
       flexDirection="column"
+      minWidth="600px"
     >
       <h1>Todo App with Material UI</h1>
       {todoList.length > 0 ? (
-        <TodoList key="1" todoList={todoList} updateTodoList={updateTodoList} />
+        <TodoList
+          key="1"
+          todoList={todoList}
+          updateTodoList={updateTodoList}
+          addToTodoList={addToTodoList}
+        />
       ) : (
         <div>Loading Todos...</div>
       )}

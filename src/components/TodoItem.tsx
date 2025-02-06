@@ -27,26 +27,6 @@ const TodoItem = ({ todoItem, updateList }: TodoItemProps) => {
   };
 
   return (
-    // <div key={"li" + todoItem.id}>
-    // <input
-    //   type="checkbox"
-    //   id={"cb" + todoItem.id}
-    //   checked={checkboxState}
-    //   onChange={handleCheckboxChange}
-    // />
-    //   <label htmlFor={"cb" + todoItem.id}>{todoItem.todo}</label>
-    // </div>
-    // <ListItem key={todoItem.id}>
-    //   <FormGroup>
-    //     <FormControlLabel
-    //       control={
-    //         <Checkbox checked={checkboxState} onChange={handleCheckboxChange} />
-    //       }
-    //       value={todoItem.todo}
-    //       label={todoItem.todo}
-    //     ></FormControlLabel>
-    //   </FormGroup>
-    // </ListItem>
     <ListItem>
       <ListItemButton
         role={undefined}
