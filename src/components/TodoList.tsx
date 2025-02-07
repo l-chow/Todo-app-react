@@ -142,7 +142,7 @@ const TodoList = ({
                     ></TodoItem>
                   );
                 })}
-          {todoList.length <= 0 ? (
+          {todoList.filter((todo) => !todo.completed).length <= 0 ? (
             <GetRandomTodo addNewTodo={handleAddNewTodo}></GetRandomTodo>
           ) : (
             <></>
