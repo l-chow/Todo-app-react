@@ -6,29 +6,41 @@ import "./styles.css";
 import * as Constants from "./constants";
 
 function App() {
+  let usersTodos = localStorage.getItem("userTodoList");
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchTodoList = () => {
-    fetch("https://dummyjson.com/todos?limit=3")
-      .then((res) => res.json())
-      .then((data: { todos: Todo[] }) => {
-        console.log(data);
-        setTodoList(
-          data.todos.map((item) => {
-            return {
-              ...item,
-              userId: Constants.CURRENT_USER_ID,
-            };
-          })
-        );
-        setLoading(false);
-      });
+    if (usersTodos) {
+      let usersTodoList: Todo[] = JSON.parse(usersTodos);
+      setTodoList(usersTodoList);
+    }
+    setLoading(false);
+    // else {
+    //   fetch("https://dummyjson.com/todos?limit=3")
+    //     .then((res) => res.json())
+    //     .then((data: { todos: Todo[] }) => {
+    //       console.log(data);
+    //       setTodoList(
+    //         data.todos.map((item) => {
+    //           return {
+    //             ...item,
+    //             userId: Constants.CURRENT_USER_ID,
+    //           };
+    //         })
+    //       );
+    //       setLoading(false);
+    //     });
+    // }
   };
 
   useEffect(() => {
     fetchTodoList();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("userTodoList", JSON.stringify(todoList));
+  }, [todoList]);
 
   const updateTodoList = (item: Todo) => {
     setTodoList(
