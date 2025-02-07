@@ -1,11 +1,5 @@
-import {
-  FormControlLabel,
-  FormGroup,
-  InputLabel,
-  ListItem,
-  TextField,
-} from "@mui/material";
-import { FocusEventHandler, useState } from "react";
+import { ListItem, TextField } from "@mui/material";
+import { useState } from "react";
 
 type AddTodoItemProps = {
   addNewTodo: (text: string) => void;

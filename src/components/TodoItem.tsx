@@ -1,18 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Todo } from "../types/Todo";
 import {
-  Card,
-  CardContent,
   Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
   IconButton,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
@@ -49,7 +43,7 @@ const TodoItem = ({ todoItem, updateList, deleteTodoItem }: TodoItemProps) => {
         }}
       >
         <ListItemIcon>
-          <Checkbox sx={{ paddingLeft: "0px" }} checked={checkboxState} />
+          <Checkbox className="todo-item-checkbox" checked={checkboxState} />
         </ListItemIcon>
         <ListItemText primary={todoItem.todo} />
       </ListItemButton>

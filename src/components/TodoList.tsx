@@ -17,6 +17,8 @@ import {
 } from "@mui/material";
 import { AddCircle } from "@mui/icons-material";
 import AddTodoItem from "./AddTodoItem";
+import GetRandomTodo from "./GetRandomTodo";
+import * as Constants from "../constants";
 
 // TODO: add way to delete tasks (+ all completed tasks at once)
 //
@@ -44,16 +46,18 @@ const TodoList = ({
 
   const handleAddNewTodo = (text: string) => {
     let newId =
-      todoList
-        .map((item) => item.id)
-        .reduce((prev, curr) => {
-          return curr > prev ? curr : prev;
-        }) + 1;
+      todoList.length > 0
+        ? todoList
+            .map((item) => item.id)
+            .reduce((prev, curr) => {
+              return curr > prev ? curr : prev;
+            }) + 1
+        : 1;
     let newTodo: Todo = {
       id: newId,
       todo: text,
       completed: false,
-      userId: 99999,
+      userId: Constants.CURRENT_USER_ID,
     };
     addToTodoList(newTodo);
     setAddingNewTask(false);
@@ -138,6 +142,11 @@ const TodoList = ({
                     ></TodoItem>
                   );
                 })}
+          {todoList.length <= 0 ? (
+            <GetRandomTodo addNewTodo={handleAddNewTodo}></GetRandomTodo>
+          ) : (
+            <></>
+          )}
         </List>
       </CardContent>
     </Card>

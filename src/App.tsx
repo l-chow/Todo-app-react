@@ -2,16 +2,27 @@ import { useEffect, useState } from "react";
 import { Todo } from "./types/Todo";
 import TodoList from "./components/TodoList";
 import { Box } from "@mui/material";
+import "./styles.css";
+import * as Constants from "./constants";
 
 function App() {
   const [todoList, setTodoList] = useState<Todo[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchTodoList = () => {
     fetch("https://dummyjson.com/todos?limit=3")
       .then((res) => res.json())
       .then((data: { todos: Todo[] }) => {
         console.log(data);
-        setTodoList(data.todos);
+        setTodoList(
+          data.todos.map((item) => {
+            return {
+              ...item,
+              userId: Constants.CURRENT_USER_ID,
+            };
+          })
+        );
+        setLoading(false);
       });
   };
 
@@ -50,7 +61,7 @@ function App() {
       flexDirection="column"
     >
       <h1>Todo App with Material UI</h1>
-      {todoList.length > 0 ? (
+      {!loading ? (
         <TodoList
           key="1"
           todoList={todoList}
