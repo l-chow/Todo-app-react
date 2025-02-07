@@ -19,6 +19,7 @@ import { AddCircle } from "@mui/icons-material";
 import AddTodoItem from "./AddTodoItem";
 import GetRandomTodo from "./GetRandomTodo";
 import * as Constants from "../constants";
+import styles from "./styles.module.css";
 
 // TODO: add way to delete tasks (+ all completed tasks at once)
 //
@@ -82,12 +83,17 @@ const TodoList = ({
       }}
     >
       <CardHeader
+        className={styles["todo-card-header"]}
         title="List of Todos"
         action={
           <FormGroup row>
             <FormControlLabel
               control={
-                <Switch defaultChecked onChange={handleCompletedToggleChange} />
+                <Switch
+                  size="small"
+                  defaultChecked
+                  onChange={handleCompletedToggleChange}
+                />
               }
               label="Show Completed"
             />

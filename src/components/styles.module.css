@@ -1,3 +1,9 @@
 .todo-list-item .todo-item-checkbox {
     padding-left: 0px;
 }
+
+.todo-card-header {
+    :global(.MuiCardHeader-action) {
+        align-self: center;
+    }
+}
